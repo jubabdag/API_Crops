@@ -1,0 +1,604 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Este é um exemplo simples de API",
+    "version": "1.0.0",
+    "title": "Exemplo Simples de API - Crops",
+    "contact": {
+      "email": "juvenal.yoshikawa@fatec.sp.gov.br"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/FatecPompeia1/Crops02/1.0.0",
+  "tags": [
+    {
+      "name": "admins",
+      "description": "chamadas seguras apenas para administradores"
+    },
+    {
+      "name": "clientes",
+      "description": "operações de busca para clientes"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/culturas": {
+      "get": {
+        "tags": [
+          "admins",
+          "clientes"
+        ],
+        "summary": "lista todas as culturas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "busca",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "resultados de busca obedecendo o critério passado",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Cultura"
+              }
+            }
+          },
+          "400": {
+            "description": "parâmetro de entrada inválido"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adciona uma cultura",
+        "description": "inclui uma cultura",
+        "operationId": "adicionarCultura",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "cultura",
+            "description": "dados da cultura sendo adicionado",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Cultura"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "cultura criada"
+          },
+          "400": {
+            "description": "dados inválidos"
+          },
+          "409": {
+            "description": "cultura já existente"
+          }
+        }
+      }
+    },
+    "/culturas/{culturaId}": {
+      "put": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "atualiza uma cultura existente",
+        "operationId": "atualizarCultura",
+        "parameters": [
+          {
+            "name": "culturaId",
+            "in": "path",
+            "description": "dados da cultura sendo atualizado",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "cultura não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "deleta uma cultura",
+        "operationId": "deletarCultura",
+        "parameters": [
+          {
+            "name": "culturaId",
+            "in": "path",
+            "description": "cultura id para deletar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "cultura não encontrada"
+          }
+        }
+      }
+    },
+    "/dicas": {
+      "get": {
+        "tags": [
+          "clientes",
+          "admins"
+        ],
+        "summary": "lista os manejos da cultura",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "busca",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "resultados de busca obedecendo o critério passado",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Dicas"
+              }
+            }
+          },
+          "400": {
+            "description": "parâmetro de entrada inválido"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adciona uma dica",
+        "description": "inclui uma dica",
+        "operationId": "adicionarDica",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dica",
+            "description": "dados da dica sendo adicionado",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Dicas"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "dica criada"
+          },
+          "400": {
+            "description": "dados inválidos"
+          },
+          "409": {
+            "description": "dica já existente"
+          }
+        }
+      }
+    },
+    "/dicas/{dicaId}": {
+      "put": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "atualiza uma dica existente",
+        "operationId": "atualizarDica",
+        "parameters": [
+          {
+            "name": "dicaId",
+            "in": "path",
+            "description": "dados da dica sendo atualizado",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "dica não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "deleta uma dica",
+        "operationId": "deletarDica",
+        "parameters": [
+          {
+            "name": "dicaId",
+            "in": "path",
+            "description": "dica id para deletar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "dica não encontrada"
+          }
+        }
+      }
+    },
+    "/data": {
+      "get": {
+        "tags": [
+          "clientes",
+          "admins"
+        ],
+        "summary": "lista as datas de semeadura e colheita da cultura",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "busca",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "resultados de busca obedecendo o critério passado",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Data"
+              }
+            }
+          },
+          "400": {
+            "description": "parâmetro de entrada inválido"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adciona uma data",
+        "description": "inclui uma data",
+        "operationId": "adicionarData",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "description": "dados da data sendo adicionado",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Data"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "data criada"
+          },
+          "400": {
+            "description": "dados inválidos"
+          },
+          "409": {
+            "description": "data já existente"
+          }
+        }
+      }
+    },
+    "/data/{dataId}": {
+      "put": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "atualiza uma data existente",
+        "operationId": "atualizarData",
+        "parameters": [
+          {
+            "name": "dataId",
+            "in": "path",
+            "description": "dados da data sendo atualizado",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "data não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "deleta uma data",
+        "operationId": "deletarData",
+        "parameters": [
+          {
+            "name": "dataId",
+            "in": "path",
+            "description": "data id para deletar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "data não encontrada"
+          }
+        }
+      }
+    },
+    "/variedade": {
+      "get": {
+        "tags": [
+          "clientes",
+          "admins"
+        ],
+        "summary": "lista as variedades da cultura",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "busca",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "resultados de busca obedecendo o critério passado",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Variedade"
+              }
+            }
+          },
+          "400": {
+            "description": "parâmetro de entrada inválido"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adciona uma variedade",
+        "description": "inclui uma variedade",
+        "operationId": "adicionarVariedade",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "data",
+            "description": "dados da variedade sendo adicionado",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Variedade"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "variedade criada"
+          },
+          "400": {
+            "description": "dados inválidos"
+          },
+          "409": {
+            "description": "variedade já existente"
+          }
+        }
+      }
+    },
+    "/variedade/{variedadeId}": {
+      "put": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "atualiza uma variedade existente",
+        "operationId": "atualizarVariedade",
+        "parameters": [
+          {
+            "name": "variedadeId",
+            "in": "path",
+            "description": "dados da variedade sendo atualizado",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "variedade não encontrada"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "deleta uma variedade",
+        "operationId": "deletarVariedade",
+        "parameters": [
+          {
+            "name": "variedadeId",
+            "in": "path",
+            "description": "variedade id para deletar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "ID inválido fornecido"
+          },
+          "404": {
+            "description": "variedade não encontrada"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Cultura": {
+      "type": "object",
+      "required": [
+        "codigo",
+        "nomeCultura"
+      ],
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 1
+        },
+        "nomeCultura": {
+          "type": "string",
+          "example": "Milho"
+        }
+      }
+    },
+    "Data": {
+      "required": [
+        "codigo"
+      ],
+      "properties": {
+        "codigo": {
+          "type": "integer"
+        },
+        "dataSemeadura": {
+          "type": "string",
+          "example": "Agosto"
+        },
+        "dataColheita": {
+          "type": "string",
+          "example": "Dezembro"
+        }
+      }
+    },
+    "Variedade": {
+      "required": [
+        "codigo",
+        "cultura",
+        "nomeVariedade"
+      ],
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 1
+        },
+        "nomeVariedade": {
+          "type": "string",
+          "example": "milho pipoca"
+        },
+        "cultura": {
+          "$ref": "#/definitions/Cultura"
+        },
+        "data": {
+          "$ref": "#/definitions/Data"
+        },
+        "dicas": {
+          "$ref": "#/definitions/Dicas"
+        }
+      }
+    },
+    "Dicas": {
+      "required": [
+        "codigo",
+        "descricao",
+        "nome"
+      ],
+      "properties": {
+        "codigo": {
+          "type": "integer",
+          "example": 1
+        },
+        "nome": {
+          "type": "string",
+          "example": "tratos culturais"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "adubação"
+        }
+      }
+    }
+  }
+}
