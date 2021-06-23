@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping(path = "/culturas")
+@CrossOrigin(maxAge = 3600)
 
 public class CulturaController {
-       
+    
     @Autowired
     private CulturaRepository culturaRepository;
     // Seleciona Todas as Culturas
@@ -35,18 +37,16 @@ public class CulturaController {
         return culturaRepository.findById(id);
     }
     // Seleciona a Cultura pelo nome
-    @GetMapping(path = "/culturas/Busca")
+    @GetMapping("/Busca")
     public @ResponseBody List<Cultura> obterCulturaPorNome(@RequestParam String nome){
         return culturaRepository.findByNomeIgnoreCaseContaining(nome);
     }
     // Inseri um Cultura
     @PostMapping
-    public ResponseEntity<Object> cadastrarCultura(@RequestBody Cultura cultura){
-        if(culturaRepository.save(cultura) != null){
-            return ResponseEntity.status(201).build();
-        }else{
-            return ResponseEntity.badRequest().build();
-        }
+    public @ResponseBody Cultura cadastrarCultura(@RequestBody Cultura cultura){
+        Cultura novaCultura = new Cultura();
+        novaCultura.setNome(cultura.getNome());
+        return culturaRepository.save(novaCultura);
     }
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Object> excluirCultura(@PathVariable Integer id){
@@ -63,7 +63,7 @@ public class CulturaController {
         if (!cult.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        cultura.setCodigo(id);
+        cultura.setCodigoCultura(id);
         culturaRepository.save(cultura);
         return ResponseEntity.status(201).build();
     }

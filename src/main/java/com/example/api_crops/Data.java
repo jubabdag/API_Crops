@@ -1,5 +1,4 @@
 package com.example.api_crops;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +11,9 @@ public class Data{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int codigoData;
     
-    private Date dataSemeadura;
-    private Date dataColheita;
-    // Construtor
-    /*public Data(Date datasemeadura, Date datacolheita){
-        this.dataSemeadura = datasemeadura;
-        this.dataColheita = datacolheita;
-    }*/
+    private String dataSemeadura;
+    private String dataColheita;
+    
     // Getters and Setters
     public void setCodigoData(int codigoData) {
         this.codigoData = codigoData;
@@ -26,16 +21,16 @@ public class Data{
     public int getCodigoData() {
         return codigoData;
     }
-    public Date getDataSemeadura(){
+    public String getDataSemeadura(){
         return dataSemeadura;
     }
-    public void setDataSemeadura(Date datasemeadura){
+    public void setDataSemeadura(String datasemeadura){
             this.dataSemeadura = datasemeadura;
     }
-    public Date getDataColheita() {
+    public String getDataColheita() {
         return dataColheita;
     }
-    public void setDataColheita(Date dataColheita) {
+    public void setDataColheita(String dataColheita) {
         this.dataColheita = dataColheita;
     }
 }

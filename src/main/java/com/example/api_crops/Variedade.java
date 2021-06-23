@@ -3,9 +3,7 @@ package com.example.api_crops;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.springframework.lang.NonNull;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
 
 @Entity
@@ -14,8 +12,16 @@ public class Variedade{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int codigoVariedade;
     
-    @NonNull
     private String nomeVariedade;
+
+    @ManyToOne
+    private Cultura cultura;
+
+    @ManyToOne
+    private Data data;
+    
+    @ManyToOne
+    private Dicas dica;
 
     public int getCodigoVariedade() {
         return codigoVariedade;
@@ -31,5 +37,29 @@ public class Variedade{
 
     public void setNomeVariedade(String nomeVariedade) {
         this.nomeVariedade = nomeVariedade;
+    }
+
+    public Cultura getCultura() {
+        return cultura;
+    }
+
+    public void setCultura(Cultura cultura) {
+        this.cultura = cultura;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public Dicas getDica() {
+        return dica;
+    }
+
+    public void setDica(Dicas dica) {
+        this.dica = dica;
     }
 }

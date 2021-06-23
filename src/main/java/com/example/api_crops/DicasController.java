@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequestMapping(path = "/dicas")
 public class DicasController {
-       
+
     @Autowired
     private DicasRepository dicasRepository;
     // Seleciona Todas as Dicas

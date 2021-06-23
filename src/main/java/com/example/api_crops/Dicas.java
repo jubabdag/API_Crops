@@ -32,10 +32,4 @@ public class Dicas {
     public void setDescricaoDicas(String descricaoDicas) {
         this.descricaoDicas = descricaoDicas;
     }
-
-    // Construtor
-    /*public Dicas(String nomedicas, String descricaodicas){
-        this.nomeDicas = nomedicas;
-        this.descricaoDicas = descricaodicas;
-    }*/
 }

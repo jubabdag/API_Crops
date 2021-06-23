@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping(path = "/datas")
 
 public class DataController {
-       
+    
     @Autowired
     private DataRepository dataRepository;
     // Seleciona Todas as Data
@@ -34,10 +34,10 @@ public class DataController {
     }
     // Inseri um Data
     @PostMapping
-    public @ResponseBody Data cadastraData(@RequestBody Data dataSemeadura, Data dataColheita){
+    public @ResponseBody Data cadastraData(@RequestBody Data data){
         Data novaData = new Data();
-        novaData.setDataSemeadura(dataSemeadura.getDataSemeadura());
-        novaData.setDataColheita(dataColheita.getDataColheita());
+        novaData.setDataSemeadura(data.getDataSemeadura());
+        novaData.setDataColheita(data.getDataColheita());
         return dataRepository.save(novaData);
     }
     @DeleteMapping(value = "{id}")
